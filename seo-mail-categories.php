@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: Seo mail categories
-Plugin URI: http://cabrero.ch
+Plugin URI: https://github.com/christiancabrero/SEO-Mail-Categories.git
 Description: Plugin que notifica por email si las categorias o etiquetas no se usan durante un determinado tiempo.
 Author: Christian Cabrero
 Author URI: http://cabrero.ch
