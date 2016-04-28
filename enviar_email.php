@@ -1,9 +1,8 @@
 <?php
-// include_once('libreria_smtp.php');
 
 // En la variable submit tenemos todos los datos de un formulario 
 $submit=$_REQUEST['submit'];
-// Direccion de envio obtenida del formulario, con get_option('admin_email'); obtendria el mail por defecto
+// Direccion de envio obtenida del formulario, con get_option('admin_email'); obtendria el mail por defecto del admin
 $email = $_REQUEST['email'];
 // Direccion email administrador:
 $admin_email = get_option('admin_email');
@@ -14,45 +13,43 @@ $url = get_site_url();
 // Cabecera obligatoria:
 $header = "MIME-Version: 1.0\n";
 $header .= "Content-Type: text/html; charset=iso-8859-1\n";
-$header .="From: NotificacionesSEO@$url";
-
-// Mensaje del email:
-$mensaje = "
-<font face='verdana' size='2'>Hola $email,<br/><br/>
-Este es un aviso desde $url.<br/><br/>
-Simplemente te molestamos para avisarte de que hace tiempo que no escribes.<br/><br/>
-Si esto es un error o no pediste recibir este email, por favor 
-contacta con el <a href='mailto:$admin_email'>administrador</a> del sitio.<br/><br/>";
-
-/*
-if($submit): 
-	//podemos pasar un array de direcciones de email a cuales enviar.
-	$to=array('soportecabrero@gmail.com','aplicacionesweb@yopmail.com');
-	//Asunto del email
-	$subject='Informe de SEO blog.chavanel.es';
-	//$subject=$submit['asunto'];
-	//La dirección de envio del email es la de nuestro blog por lo que agregando este header podremos responder al remitente original 
-	$headers = 'Reply-to: '.$submit['nombre'].' '.$submit['apellido'].' <'.$submit['email'].'>' . "\r\n";
-	//El mensaje a enviar. Se puede incluir HTML si enviamos el email en modo HTML y no texto.
-	$message.='Hola <br/>'; $message.='Te gusta este tutorial?';
-	//Filtro para indicar que email debe ser enviado en modo HTML
-	add_filter('wp_mail_content_type',create_function('', 'return "text/html";'));
-	//Cambiamos el remitente del email que en Wordpress por defecto es tu email de admin
-	add_filter('wp_mail_from','mqw_email_from');
-	function mqw_email_from($content_type) { return 'soportecabrero@gmail.com'; }
-	//Cambiamos el nombre del remitente del email que en Wordpress por defecto es "Wordpress" 
-	add_filter('wp_mail_from_name','mqw_email_from');
-	function mqw_email_from($name) { return 'Administrador Christian'; }
-	//Por último enviamos el email
-	wp_mail( $to, $subject, $message, $headers);     
-endif;*/
-
-# Función de envío del mensaje
-if ($activo == true){
-	mail("$email","Aviso SEO etiquetas y categorias","$mensaje","$header");
-}
+$header .="From: MailCategories@";
 
 
+// Loop cuenta entradas 
+require_once("comparar_fechas.php");// Incluye la funcion que compara fechas
+$primera = date('d/m/Y');// Fecha de hoy
 
+for ($i=1;$i<=10;$i++){
+	query_posts('cat='.$i.'&showposts=1');// Consulta los datos de 1 post de la categoria especificada
+	
+	while (have_posts()) : the_post();
+	
+	$fecha_post=get_the_date('d/m/Y');
+	$segunda = $fecha_post;
+	$dias_antiguedad=compararFechas($primera,$segunda);
+	$dias_aviso=get_option('form_dias');
+	
+	// FunciÃ³n de envÃ­o del mensaje
+	if ( ($activo == true) && ($dias_aviso == $dias_antiguedad) ){
+		
+		$permalink=get_the_permalink();
+		$titulo_post=get_the_title();
+		$link_post="<a href='$permalink'>$titulo_post</a>";
+		
+		// Mensaje del email:
+		$mensaje = "<font face='verdana' size='2'>Hola $email,<br/><br/>
+		Este es un aviso desde $url.<br/><br/>
+		Simplemente te molestamos para avisarte de que hace tiempo que no escribes ninguna entrada en la categorÃ­a <b>"
+		.get_cat_name($i)."</b>, la Ãºltima entrada que escribiste fue ".$link_post." el <b>".$fecha_post."</b> hace <b>".$dias_antiguedad."</b> dÃ­as.<br/><br/>
+		Si has recibido este mensaje por error, por favor 
+		contacta con el <a href='mailto:$admin_email'>administrador</a> del sitio.<br/><br/>";
+		
+		mail("$email","Hace tiempo que no escribes","$mensaje","$header");
+	}
+	
+	endwhile;
+	wp_reset_query();
+};
 
 ?>

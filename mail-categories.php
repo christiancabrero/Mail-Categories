@@ -1,38 +1,38 @@
 <?php
 /*
-Plugin Name: Seo mail categories
-Plugin URI: https://github.com/christiancabrero/SEO-Mail-Categories.git
-Description: Plugin que notifica por email si las categorias o etiquetas no se usan durante un determinado tiempo.
+Plugin Name: Mail Categories
+Plugin URI: https://github.com/christiancabrero/Mail-Categories
+Description: Plugin que realiza un informe de la ultima entrada de cada categoría y avisa por email si hace tiempo que no se publican entradas.
 Author: Christian Cabrero
 Author URI: http://cabrero.ch
-Version: 1.0.1
+Version: 0.9
 License: GPLv2
 */
 
-/* funci�n que pinta el men� debajo de ajustes*/
+/* función que pinta el menú debajo de ajustes*/
 function menu_fuera_ajustes(){
     add_menu_page( 
-    	'SEO mail categories', //t�tulo de la p�gina
-    	'Notificaciones SEO', //t�tulo del men�
+    	'Mail Categories', //título de la página
+    	'Mail Categories', //título del menú
     	'activate_plugins', //capability
-    	'seo-mail-opciones', //slug cambiar por read para pintar dentro de ajustes
-    	'miplugin_pagina_de_opciones', //funci�n que se ejecutar� para pintar el contenido
+    	'ajustes-mail-categories', //slug cambiar por read para pintar dentro de ajustes
+    	'miplugin_pagina_de_opciones', //función que se ejecutará para pintar el contenido
     	'dashicons-email-alt', //icono interno WP: https://developer.wordpress.org/resource/dashicons
     	80 //posicion: 5,10,15,20,25,60,65,70,75,80,100
     );
 }
-/* funci�n que pinta el men� dentro de ajustes*/
+/* función que pinta el menú dentro de ajustes*/
 function menu_dentro_ajustes(){
     add_options_page(
 	'Titulo de la pagina',
-	'SEO mail categories',
+	'Mail categories',
 	'read',
-	'seo-mail-opciones',
+	'ajustes-mail-opciones',
 	'miplugin_pagina_de_opciones'
 	);
 }
 
-/* acci�n para a�adir la opci�n de nuestro plugin al men� */
+/* acción para añadir la opción de nuestro plugin al menú */
 add_action('admin_menu','menu_fuera_ajustes');
 
 function miplugin_pagina_de_opciones(){
