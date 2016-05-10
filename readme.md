@@ -11,7 +11,6 @@
 >###CAMBIOS:
 
 >1.0
-
 * Comprobación y limpieza de formulario (sanitize)
 * Acceso directo protegido (abspath)* Nonces formulario
 * Cron que comprueba cada día (si hay visitas)
@@ -62,7 +61,7 @@
 * Creación de archivos principales 
 * Inyección de motivación 
  
->###PRÓXIMA ACTUALIZACIÓN
+>###PRÓXIMA ACTUALIZACIÓN:
  
 >1.1
 * Cron real o solución a visita diaria
