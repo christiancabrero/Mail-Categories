@@ -8,63 +8,63 @@
 >2. Activar el plugin desde el administrador de plugins de wordpress.
 >3. Aparecerá un nuevo menú bajo el menú "Ajustes" llamado "Mail Categories" para configurar el plugin.
 
-== Changelog == 
+>###CAMBIOS:
 
-= 1.0 =
+>1.0
 
 * Comprobación y limpieza de formulario (sanitize)
 * Acceso directo protegido (abspath)* Nonces formulario
 * Cron que comprueba cada día (si hay visitas)
  
-= 0.9 = 
+>0.9
 * Cambio de formato del email 
 * Cambio de ubicación snnipet comprueba_fecha 
 * Capturas de pantalla 
  
-= 0.8 = 
+>0.8
 * Colores de estado en ajustes del plugin 
 * Elimininado checkbox categorías/etiquetas 
  
-= 0.7 = 
+>0.7 
 * Añadido snnipet loop que comprueba entradas 
 * Limpieza de código y comentarios 
  
-= 0.6 = 
+>0.6
 * Añadida comprobación fecha actual 
 * Añadida comprobación fecha último post 
 * Guardado de opciones del formulario 
  
-= 0.5 = 
+>0.5
 * Snnipet de envío por email 
 * Eliminado resumen y estadisticas de entradas 
 * Añadidas categorías de entradas 
 * Añadido permalink 
 * Añadido titulo de entrada 
  
-= 0.4 = 
+>0.4
 * Formato de email básico 
 * Eliminación de librerías innecesarias 
 * Eliminación de snnipets innecesarios 
 * Cambio a menú de ajustes con icono 
  
-= 0.3 = 
+>0.3
 * Creación e instalación del plugin .zip 
 * Información y estadisticas de entradas 
 * Añadido formulario de opciones 
  
-= 0.2 = 
+>0.2
 * Instalación manual 
 * Submenú de ajustes 
 * Creación de archivo readme.txt 
  
-= 0.1 = 
+>0.1
 * Cabecera del archivo principal 
 * Creación de archivos principales 
 * Inyección de motivación 
  
-== Upgrade Notice == 
+>###PRÓXIMA ACTUALIZACIÓN
  
-= 1.1 = 
+>1.1
 * Cron real o solución a visita diaria
 * Comprobación de id's ilimitados o seleccionables
 * Reaorganización de código 
